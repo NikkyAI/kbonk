@@ -8,7 +8,6 @@ import com.github.ajalt.clikt.output.CliktHelpFormatter
 import com.github.ajalt.clikt.parameters.options.versionOption
 import fullBinaryPath
 import logging.getLogger
-import mu.KotlinLogging
 
 
 class KBonkCommand : CliktCommand(
@@ -26,7 +25,7 @@ class KBonkCommand : CliktCommand(
         versionOption(version = "0.0.1")
         completionOption()
         subcommands(
-            ServerCommand(),
+            ServeCommand(),
             TestCommand(),
         )
     }

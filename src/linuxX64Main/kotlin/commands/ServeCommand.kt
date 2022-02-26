@@ -38,7 +38,7 @@ class ServerOptions : OptionGroup() {
         .default(DEFAULT_BIND)
 }
 
-class ServerCommand() : CliktCommand(
+class ServeCommand() : CliktCommand(
     name = "serve"
 ) {
     private val logger = getLogger()

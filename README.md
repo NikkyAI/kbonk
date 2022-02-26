@@ -14,7 +14,7 @@ pacman -S imagemagick
 
 ```bash
 ./gradlew linkReleaseExecutableLinuxX64
-cp build/bin/linuxX64/debugExecutable/kbonk.kexe kbonk
+cp build/bin/linuxX64/releaseExecutable/kbonk.kexe kbonk
 ```
 
 ### required data
