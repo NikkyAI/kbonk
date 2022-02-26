@@ -1,0 +1,7 @@
+headers = MagickWand/MagickWand.h
+
+# headerFilter = MagickWand/*.h \
+#               MagicCore/*.h
+
+compilerOpts.linux = -I/usr/include -I/usr/include/ImageMagick-7 -fopenmp -DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16
+linkerOpts.linux = -L/usr/lib -lMagickWand-7.Q16HDRI -lMagickCore-7.Q16HDRI
