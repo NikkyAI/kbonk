@@ -10,7 +10,7 @@ import fullBinaryPath
 import logging.getLogger
 
 
-class KBonkCommand : CliktCommand(
+class MainCommand : CliktCommand(
     name = fullBinaryPath.substringAfterLast("/"),
     invokeWithoutSubcommand = false
 ) {

@@ -4,7 +4,7 @@ import io.ktor.util.logging.*
 import logging.getLogger
 import mu.KLogger
 
-class KtorLogger(private val logger: KLogger = getLogger("ktor.application")) : Logger {
+class KtorKLogger(private val logger: KLogger = getLogger("ktor.application")) : Logger {
     override fun error(message: String) {
         logger.error { message }
     }

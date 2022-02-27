@@ -1,9 +1,12 @@
 package server
 
 import io.ktor.server.application.*
+import io.ktor.server.cio.*
 import io.ktor.server.engine.*
 import io.ktor.util.logging.*
 import kotlinx.coroutines.*
+import nikky.moe.plugins.configureHTTP
+import server.plugins.configureRouting
 import kotlin.coroutines.*
 
 /**
@@ -38,7 +41,7 @@ public fun <TEngine : ApplicationEngine, TConfiguration : ApplicationEngine.Conf
     host: String = "0.0.0.0",
     logger: Logger = KtorSimpleLogger("ktor.application"),
     watchPaths: List<String> = listOf(),
-    parentCoroutineContext: CoroutineContext = EmptyCoroutineContext,
+    parentCoroutineContext: CoroutineContext = coroutineContext,
     configure: TConfiguration.() -> Unit = {},
     module: Application.() -> Unit
 ): TEngine {
