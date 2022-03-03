@@ -14,30 +14,10 @@ import server.plugins.configureRouting
 import platform.posix.*
 import kotlinx.cinterop.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.sync.Semaphore
 import logging.getLogger
 import server.KtorKLogger
 import server.embeddedServer
-import kotlin.coroutines.Continuation
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
-class ServerOptions : OptionGroup() {
-    private val DEFAULT_PORT by lazy {
-        getenv("PORT")?.toKString()?.toIntOrNull() ?: 1337
-    }
-    private val DEFAULT_HOST by lazy {
-        getenv("BIND")?.toKString() ?: "0.0.0.0"
-    }
-    val port: Int by option("--port")
-        .int()
-        .default(DEFAULT_PORT)
-        .check("must be valid port numnber") { port ->
-            port in 1024..65535
-        }
-    val host: String by option("--host")
-        .default(DEFAULT_HOST)
-}
 
 class ServeCommand() : CliktCommand(
     name = "serve"
@@ -113,6 +93,23 @@ class ServeCommand() : CliktCommand(
         server.stop()
         logger.info { "server stopped" }
         exit(0)
+    }
+
+    class ServerOptions : OptionGroup() {
+        private val DEFAULT_PORT by lazy {
+            getenv("PORT")?.toKString()?.toIntOrNull() ?: 1337
+        }
+        private val DEFAULT_HOST by lazy {
+            getenv("BIND")?.toKString() ?: "0.0.0.0"
+        }
+        val port: Int by option("--port")
+            .int()
+            .default(DEFAULT_PORT)
+            .check("must be valid port numnber") { port ->
+                port in 1024..65535
+            }
+        val host: String by option("--host")
+            .default(DEFAULT_HOST)
     }
 }
 

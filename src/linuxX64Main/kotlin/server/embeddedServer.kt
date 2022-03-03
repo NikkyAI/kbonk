@@ -5,27 +5,7 @@ import io.ktor.server.cio.*
 import io.ktor.server.engine.*
 import io.ktor.util.logging.*
 import kotlinx.coroutines.*
-import nikky.moe.plugins.configureHTTP
-import server.plugins.configureRouting
 import kotlin.coroutines.*
-
-/**
- * Creates an embedded server with the given [factory], listening on [host]:[port]
- * @param watchPaths specifies path substrings that will be watched for automatic reloading
- * @param configure configuration script for the engine
- * @param module application module function
- */
-@OptIn(DelicateCoroutinesApi::class)
-public fun <TEngine : ApplicationEngine, TConfiguration : ApplicationEngine.Configuration>
-embeddedServer(
-    factory: ApplicationEngineFactory<TEngine, TConfiguration>,
-    port: Int = 80,
-    host: String = "0.0.0.0",
-    logger: Logger = KtorSimpleLogger("ktor.application"),
-    watchPaths: List<String> = listOf(),
-    configure: TConfiguration.() -> Unit = {},
-    module: Application.() -> Unit
-): TEngine = GlobalScope.embeddedServer(factory, port, host, logger, watchPaths, EmptyCoroutineContext, configure, module)
 
 /**
  * Creates an embedded server with the given [factory], listening on [host]:[port]
@@ -34,7 +14,7 @@ embeddedServer(
  * @param parentCoroutineContext specifies a coroutine context to be used for server jobs
  * @param module application module function
  */
-public fun <TEngine : ApplicationEngine, TConfiguration : ApplicationEngine.Configuration>
+fun <TEngine : ApplicationEngine, TConfiguration : ApplicationEngine.Configuration>
         CoroutineScope.embeddedServer(
     factory: ApplicationEngineFactory<TEngine, TConfiguration>,
     port: Int = 80,
@@ -70,7 +50,7 @@ public fun <TEngine : ApplicationEngine, TConfiguration : ApplicationEngine.Conf
  * @param configure configuration script for the engine
  * @param module application module function
  */
-public fun <TEngine : ApplicationEngine, TConfiguration : ApplicationEngine.Configuration>
+fun <TEngine : ApplicationEngine, TConfiguration : ApplicationEngine.Configuration>
 CoroutineScope.embeddedServer(
     factory: ApplicationEngineFactory<TEngine, TConfiguration>,
     vararg connectors: EngineConnectorConfig = arrayOf(EngineConnectorBuilder()),

@@ -10,7 +10,7 @@ object ExceptionHandler {
     private val logger = getLogger()
 
     fun handleException(e: Throwable) {
-        println("")
+//        println("")
         when(e) {
             is CancellationException -> {
                 logger.error(e.cause ?: e) { "cancelled by" }

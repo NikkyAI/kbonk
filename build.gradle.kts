@@ -80,6 +80,10 @@ kotlin {
                 implementation("com.github.ajalt.mordant:mordant:_")
             }
         }
+
+        all {
+            languageSettings.optIn("kotlin.RequiresOptIn")
+        }
     }
 }
 

@@ -45,5 +45,4 @@ class KtorKLogger(private val logger: KLogger = getLogger("ktor.application")) :
         logger.trace(cause) { message }
     }
 
-
 }
