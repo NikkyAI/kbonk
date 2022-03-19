@@ -69,6 +69,7 @@ kotlin {
 
                 // json stuff
                 implementation("io.ktor:ktor-server-content-negotiation:_") // min 2.0.0-eap-315
+                implementation("io.ktor:ktor-server-auto-head-response:_")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:_")
 
                 // fixing deps
@@ -78,11 +79,13 @@ kotlin {
                 implementation("com.github.ajalt.clikt:clikt:_")
                 implementation("io.github.microutils:kotlin-logging:_")
                 implementation("com.github.ajalt.mordant:mordant:_")
+                implementation("com.squareup.okio:okio-multiplatform:_")
             }
         }
 
         all {
             languageSettings.optIn("kotlin.RequiresOptIn")
+            languageSettings.optIn("okio.ExperimentalFileSystem")
         }
     }
 }
