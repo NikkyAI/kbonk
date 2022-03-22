@@ -21,6 +21,7 @@ fun main(vararg args: String) {
 
     logger.debug { "installing signal handlers" }
     signal(SIGINT, staticCFunction(::handleSignal))
+    signal(SIGPIPE, staticCFunction(::handleSignal))
 
     MainCommand().main(args)
 }

@@ -35,21 +35,15 @@ object BonkMagick {
         }
     }
 
-    fun MemScope.bonk(imagePath: String, text: String): Memory {
-//        $image = new Imagick();
-//        $image->readImage("bonk.jpg");
-//
-//        $draw = new ImagickDraw();
-//        $draw->setFillColor('black');
-//        $draw->setGravity(imagick::GRAVITY_NORTH);
-//        $draw->setFont('Open-Sans-SemiBold');
-//
-//
-//        header('Content-type: image/jpeg');
-//        echo $image;
-
+    fun MemScope.bonk(
+        imagePointer: CArrayPointer<UByteVar>,
+        imageSize: Long,
+        text: String,
+        gravity: GravityType = NorthGravity,
+        color: String = "black",
+    ): Memory {
         val magickWand: CPointer<MagickWand> = NewMagickWand() ?: error("failed to create MagickWand")
-        MagickReadImage(magickWand, imagePath).checkStatus(magickWand, "readImage")
+        MagickReadImageBlob(magickWand, imagePointer, imageSize.toULong())
 
         logger.debug {
             val height = MagickGetImageHeight(magickWand)
@@ -61,9 +55,9 @@ object BonkMagick {
 
         val drawingWand = NewDrawingWand()
         val pixelWand = NewPixelWand()
-        PixelSetColor(pixelWand, "black").checkStatus(magickWand, "setColor")
+        PixelSetColor(pixelWand, color).checkStatus(magickWand, "setColor")
         DrawSetFillColor(drawingWand, pixelWand)
-        DrawSetGravity(drawingWand, NorthGravity)
+        DrawSetGravity(drawingWand, gravity)
         DrawSetFont(drawingWand, "Open-Sans-SemiBold").checkStatus(magickWand, "setFont")
 //        DrawSetFont(drawingWand, "data/OpenSans-SemiBold.ttf").checkStatus(magickWand, "setFont")
         DrawSetFontSize(drawingWand, 60.0)

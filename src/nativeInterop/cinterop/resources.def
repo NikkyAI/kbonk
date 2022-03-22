@@ -1,0 +1,6 @@
+headers = resources.h
+
+staticLibraries = resources.a
+libraryPaths = build/resources/lib
+
+compilerOpts = -Ibuild/resources/include
